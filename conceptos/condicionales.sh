@@ -65,7 +65,6 @@ then
     echo "La variable esta asignada"
 fi
 
-
 # Operadores dentro del [[ ]]
 
     # TODOS ESTOS OPERADORES SOLO OPERAN INTERPRETANDO TEXTOS
@@ -76,6 +75,7 @@ fi
         # -z Mira si una variable está VACIA
         # -n Mira si una variable NO está VACIA
         # -v Mira si una variable está ASIGNADA
+        # =~ Comprobar si se cumple expresión regular
         
     # OPERADORES SOBRE NUMEROS
         # -eq  Compara si dos NUMEROS son iguales  
@@ -105,6 +105,15 @@ fi
 if (( 31 > 4+17 ))
 then
     echo Obvio, 31 es mayor 4 donde sea...
+fi
+
+## Casos alternativos
+if [[ $nombre == "Lucas" ]]; then
+    echo Tu nombre es Lucas
+elif [[ $nombre == "Pato" ]]; then
+    echo Pues tu nombre es Pato
+else
+    echo Pues tu nombre no es Pato ni Lucas
 fi
 
 ###############################################################################

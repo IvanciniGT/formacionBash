@@ -71,3 +71,29 @@ saludoSuperPersonalizado Ivan Osuna
 
 # echo $0: Muestra el interprete que se está utilizando
 echo El interprete es: $0
+
+
+# La funcion return en BASH
+# La funcion return permite establecer el CODIGO DE SALIDA DE EJECUCION que 
+# devuelve una función
+function tu_nombre(){
+    return 115 # En caso de que haya un error
+}
+
+tu_nombre
+echo El codigo de salida de la funcion anterior es: $?
+
+# En BASH, podemos capturar la salida ESTANDAR que se genera al llamar a una 
+# función o un programa externo. Para eso utilizamos $(...)
+# NOTA IMPORTANTE: Ese programa/función, se ejecuta en una SUBSHELL (Todo)
+
+function tu_nombre(){
+    echo "Ivan"
+    echo "Osuna"
+    echo "Ayuste"
+}
+
+echo Tu nombre es $(tu_nombre)
+
+nombre_completo=$(tu_nombre)
+echo $nombre_completo
