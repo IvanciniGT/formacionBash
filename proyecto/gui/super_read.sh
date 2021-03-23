@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Dame la IP del servidor donde operar: 
-#read -p "Dame la IP del servidor donde operar [localhost]:" IP
-
-# Estás seguro [s]?
-#read -p "Estás seguro (s/n) [s]? " segurisimo
+# Intro de la función
 
 # Argumentos:
 #  -p, --prompt          texto   Permite especificar el mensaje que se pregunta al usuario
@@ -17,6 +13,16 @@
 #  -e, --error-message   texto   Mensaje que se muestra tras superara los intentos maximos de validacion
 #  -v, --var             texto   Nombre de la variable donde se almacenará el valor introducido por el usuario
 
+# Ejemplos
+#   Dame la IP del servidor donde operar: 
+#      read -p "Dame la IP del servidor donde operar " -v IP -d "localhost"
+
+#   Estás seguro [s]?
+#     read -p "Estás seguro (s/n) [s]? " -v segurisimo
+
+function show_help(){
+    echo AQUI IRIA LA AYUDA
+}
 
 function super_read(){
     # Renombrar parametros locales
@@ -40,6 +46,73 @@ function super_read(){
                 else
                     _prompt=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
                 fi
+            ;;
+            -d|--default|-d=*|--default=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _default=$2
+                    shift
+                else
+                    _default=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            -m|--max-attemps|-m=*|--max-attemps=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _max_attemps=$2
+                    shift
+                else
+                    _max_attemps=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            -r|--value-pattern|-r=*|--value-pattern=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _value_pattern=$2
+                    shift
+                else
+                    _value_pattern=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            -a|--allowed-values|-a=*|--allowed-values=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _allowed_values=$2
+                    shift
+                else
+                    _allowed_values=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            -f|--failure-message|-f=*|--failure-message=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _failure_message=$2
+                    shift
+                else
+                    _failure_message=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            -e|--error-message|-e=*|--error-message=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _error_message=$2
+                    shift
+                else
+                    _error_message=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            -v|--var-name|-v=*|--var-name=*)
+                if [[ "$1" != *=* ]]; then # Miro que no haya igual
+                    _var_name=$2
+                    shift
+                else
+                    _var_name=${1#*=}   # Me como del primer argumento lo que haya hasta el igual
+                fi
+            ;;
+            
+            -h|--help)
+                show_help
+                exit 0
+            ;;
+            
+            *)
+                echo "Uso incorrecto de la función super_read"
+                show_help
+                exit 1
             ;;
         esac
 
