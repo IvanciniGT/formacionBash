@@ -119,3 +119,22 @@ fi
 ###############################################################################
 # CONDICIONAL CASE
 ###############################################################################
+color="amarillo"
+case "$color" in
+    azul)   # Aqui puedo jugar con caracteres COMODIN ojo... no con REGEX: ? *
+            # Además puedo meter anidación de valores mediante el simbolo |
+        echo "SOY un pitufo"
+    ;;
+    rojo)
+        echo "Soy la bruja escarlata"
+    ;;
+    verde)
+        echo " Hulk !!!!! "
+    ;;
+    negro|gris*)
+        echo " Eres Black panther"
+    ;;
+    *)
+        echo " No tengo ni idea de quien eres"
+    ;;
+esac

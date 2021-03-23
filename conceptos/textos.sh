@@ -53,9 +53,9 @@ echo ${#mi_texto}
             # +: Significa 1 vez o muchas
             # *: Significa NINGUNA o MUCHAS
             # {4}: 4 veces
-            # {2:4}: De 2 a 4
-            # {:8}: Hasta 8
-            # {3:}: Más de 3
+            # {2,4}: De 2 a 4
+            # {,8}: Hasta 8
+            # {3,}: Más de 3
         # ^ Comienzo de texto
         # $ Fin de texto
 #EJEMPLOS

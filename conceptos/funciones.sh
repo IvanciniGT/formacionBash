@@ -97,3 +97,23 @@ echo Tu nombre es $(tu_nombre)
 
 nombre_completo=$(tu_nombre)
 echo $nombre_completo
+
+function pruebaArgumentos(){
+    echo $1  #### arg1
+    echo $#  #### 3
+
+    shift
+    echo $1  #### arg2
+    echo $#  #### 2
+
+    shift
+    echo $1  #### arg3
+    echo $#  #### 1
+    
+    shift
+    echo $1  #### NADA
+    echo $#  #### 0
+    
+}
+
+pruebaArgumentos arg1 arg2 arg3
