@@ -124,7 +124,7 @@ function super_read(){
     
     # Validar los parametros
     #  -m, --max-attemps     >>>>> numero  
-    PATRON_NUMERO_ENTERO_POSITIVO=^[0-9]+$
+    PATRON_NUMERO_ENTERO_POSITIVO=^[1-9][0-9]*$
     if [[ ! ( "$_max_attemps" =~ $PATRON_NUMERO_ENTERO_POSITIVO ) ]]
     then
         error "Uso incorrecto de la función super_read."
@@ -146,48 +146,37 @@ function super_read(){
 
     # Ya monto el código de mi programa
     
-    # Generamos el prompt
-    echo -n $_prompt
-    if [[ -n $_default ]] # Si me han pasado un valor por defecto
-    then
-        amarillo " [$_default]"
-    fi
-    echo -n ": "
-    
-    # Leer el valor del usuario
-    read _valor_del_usuario
-    
-    # Rellenando con valor por defecto si lo ha dejado vacio
-    if [[ -z $_valor_del_usuario ]]
-    then
-        _valor_del_usuario="$_default"
-    fi
-    # Validarlo
-    if [[ -n $_value_pattern ]]
-    then
-        if [[ ! ( "$_valor_del_usuario" =~ $_value_pattern ) ]]
+    while (( $_max_attemps > 0 ))
+    do
+        # Generamos el prompt
+        echo -n $_prompt
+        if [[ -n $_default ]] # Si me han pasado un valor por defecto
+        then
+            amarillo " [$_default]"
+        fi
+        echo -n ": "
+        
+        # Leer el valor del usuario
+        read _valor_del_usuario
+        
+        # Rellenando con valor por defecto si lo ha dejado vacio
+        if [[ -z $_valor_del_usuario ]]
+        then
+            _valor_del_usuario="$_default"
+        fi
+        # Validarlo
+        if [[ -n $_value_pattern && ! ( "$_valor_del_usuario" =~ $_value_pattern ) ]]
         then
             error "$_failure_message"
+            let _max_attemps=$_max_attemps-1
+        else
+            # Guardar el valor introducido por el usuario en la variable que me han dicho
+            eval $_var_name=$_valor_del_usuario                          
+            return 0
         fi    
-    fi
+    done   
     
+    error_fatal "$_error_message"
+    pausa
+    return 1
 }
-
-PATRON_IP="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-PATRON_SI_NO=^[sn]$
-PATRON_NOMBRE_SERVIDOR=^[a-z._-]+$
-PATRON_NUMERO_ENTERO_POSITIVO=^[0-9]+$
-
-#           1          2                              3      4       5  6
-super_read -p "Dame la IP del servidor donde operar" -d "127.0.0.1" -v ip -r $PATRON_IP
-
-super_read -p "Estas seguro" -d "s" -v ip -r $PATRON_SI_NO
-
-super_read -p "Reiniciar en cuantos segundos" -d "10" -v ip -r $PATRON_NUMERO_ENTERO_POSITIVO
-
-#super_read -p "Estás seguro" -d "s" -o "s n" esta_seguro
-
-# Dame la IP del servidor donde operar [localhost]: 
-
-
-super_read -p "Dame el nombre del servidor" -v ip -r $PATRON_NOMBRE_SERVIDOR -f "Nombre de servidor incorrecto"
