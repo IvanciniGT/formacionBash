@@ -20,6 +20,8 @@
 #   Estás seguro [s]?
 #     read -p "Estás seguro (s/n) [s]? " -v segurisimo
 
+source ./formatos.sh
+
 function show_help(){
     echo AQUI IRIA LA AYUDA
 }
@@ -110,7 +112,7 @@ function super_read(){
             ;;
             
             *)
-                echo "Uso incorrecto de la función super_read"
+                error "Uso incorrecto de la función super_read"
                 show_help
                 exit 1
             ;;
@@ -120,11 +122,40 @@ function super_read(){
 
     done
     
-    
+    # Validar los parametros
+    #  -m, --max-attemps     >>>>> numero  
+    PATRON_NUMERO_ENTERO_POSITIVO=^[0-9]+$
+    if [[ ! ( "$_max_attemps" =~ $PATRON_NUMERO_ENTERO_POSITIVO ) ]]
+    then
+        error "Uso incorrecto de la función super_read."
+        error "  Valor del parametro --max-attemps inválido: $_max_attemps"
+        error "  Debe ser un número positivo."
+        show_help
+        exit 2
+    fi
+    #  -v, --var             >>>>> Aqui no puede haber espacios en blanco
+    PATRON_NOMBRE_VARIABLE="^[a-zA-Z0-9_]{2,50}$"
+    if [[ ! ( "$_var_name" =~ $PATRON_NOMBRE_VARIABLE ) ]]
+    then
+        error "Uso incorrecto de la función super_read."
+        error "  Valor del parametro --var-name inválido: $_var_name"
+        error "  Debe ser un nombre de variable válido."
+        show_help
+        exit 3
+    fi
+
     # Ya monto el código de mi programa
+    echo -n $_prompt
+    if [[ -n $_default ]] # Si me han pasado un valor por defecto
+    then
+        verde " [$_default]"
+    fi
+    echo -n ": "
 }
 
 #           1          2                              3      4       5  6
 super_read -p "Dame la IP del servidor donde operar" -d "localhost" -v ip
 
 #super_read -p "Estás seguro" -d "s" -o "s n" esta_seguro
+
+# Dame la IP del servidor donde operar [localhost]: 
