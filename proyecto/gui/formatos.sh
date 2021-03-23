@@ -30,9 +30,9 @@ function definiciones(){
       local __definicion="declare -g __fondo_$color=\$(tput setab $__numero)"
       eval $__definicion
       
-      local __funcion="function $color(){ echo \"\${__$color}\$1\${__reset_formato}\";	}"
+      local __funcion="function $color(){ echo -n \"\${__$color}\$1\${__reset_formato}\";	}"
       eval $__funcion
-      __funcion="function fondo_$color(){ echo \"\${__fondo_$color}\$1\${__reset_formato}\";	}"
+      __funcion="function fondo_$color(){ echo -n \"\${__fondo_$color}\$1\${__reset_formato}\";	}"
       eval $__funcion
    done
 }
