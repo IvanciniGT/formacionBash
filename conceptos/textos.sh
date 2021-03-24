@@ -15,8 +15,18 @@ echo ${mi_texto: -10:4}    # Extraer un determinado subtexto
 echo ${mi_texto#En}     # Sacar el texto desde lo que le pida.
 echo ${mi_texto#*mancha}
 
+numero=-9
+echo ${numero#-}
+
 # Quitar sufijos
 echo ${mi_texto%no*}
+
+# Reemplazamientos
+nombre=ivan
+echo ${nombre/a/á}
+
+numero=-9
+echo ${numero/-/}
 
 # Ofrecer un valor por defecto si la variable está vacia o no asignada
 echo ${mi_texto2:-"Aqui no hay nada"}
