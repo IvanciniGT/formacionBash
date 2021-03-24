@@ -150,11 +150,21 @@ function super_read(){
     do
         # Generamos el prompt
         echo -n $_prompt
+        if [[ -n $_allowed_values ]] # Si me han pasado una lista de valores
+        then
+            local _value_list=""
+            for _valor_actual in $_allowed_values
+            do
+                _value_list="$_value_list/$_valor_actual"
+            done
+            azul " (${_value_list:1})" # Quito la primera barra
+        fi
+        echo -n ":"
         if [[ -n $_default ]] # Si me han pasado un valor por defecto
         then
             amarillo " [$_default]"
         fi
-        echo -n ": "
+        echo -n " "
         
         # Leer el valor del usuario
         read _valor_del_usuario
@@ -170,9 +180,26 @@ function super_read(){
             error "$_failure_message"
             let _max_attemps=$_max_attemps-1
         else
+
+            if [[ -n $_allowed_values ]] # Si me han pasado una lista de valores
+            then
+                for _valor_actual in $_allowed_values
+                do
+                    if [[ "$_valor_del_usuario" == "$_valor_actual" ]]
+                    then
+                        # Guardar el valor introducido por el usuario en la variable que me han dicho
+                        eval $_var_name=$_valor_del_usuario                          
+                        return 0
+                    fi
+                done
+                error "$_failure_message"
+                let _max_attemps=$_max_attemps-1
+            else
             # Guardar el valor introducido por el usuario en la variable que me han dicho
             eval $_var_name=$_valor_del_usuario                          
             return 0
+            fi
+    
         fi    
     done   
     
