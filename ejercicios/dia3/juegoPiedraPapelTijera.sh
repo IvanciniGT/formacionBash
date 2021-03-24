@@ -69,7 +69,9 @@ function jugar_un_turno(){
     echo
     echo ----------------------------------
     echo "Has elegido:   $( amarillo $jugador)"
+#    cat $jugador.txt
     echo Yo he elegido: $( amarillo $ORDENADOR)
+#    cat $ORDENADOR.txt
     morado "$(negrita "${GANADOR[$ganador]}")"
     echo 
     pausa

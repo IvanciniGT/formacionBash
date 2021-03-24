@@ -95,3 +95,24 @@ matriz["2,2"]=4
 echo ${matriz[2,2]}
 
 
+####
+declare -A opciones
+opciones["servidor"]="Gestión de servidores"
+opciones["monitorizar"]="Monitorizar servidores"
+
+for opcion in ${!opciones[@]}
+do
+        echo ${opciones[$opcion]}
+done
+####
+declare -a opciones
+opciones[0]="Gestión de servidores"
+opciones[1]="Monitorizar servidores"
+
+opciones+=("Gestión de servidores")
+opciones+=("Monitorizar servidores")
+
+for opcion in ${!opciones[@]}
+do
+        echo ${opciones[$opcion]}
+done

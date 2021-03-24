@@ -151,7 +151,7 @@ function super_read(){
     while (( $_max_attemps > 0 ))
     do
         # Generamos el prompt
-        echo -n $_prompt
+        echo -n "$_prompt"
         if [[ -n $_allowed_values ]] # Si me han pasado una lista de valores
         then
             local _value_list=""
