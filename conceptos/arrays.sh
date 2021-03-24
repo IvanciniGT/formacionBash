@@ -32,3 +32,66 @@ lista[3]="es guay !!!!"
 echo ${lista[@]}
 
 
+##### Definición de arrays
+
+colores=( rojo verde azul )
+#           0    1     2
+
+echo ${colores[1]}
+colores[2]=morado
+echo ${colores[@]}
+
+####
+declare -a superheroes
+
+superheroes[0]="Ironman"
+superheroes[1]="Thor"
+superheroes[2]="Hulk"
+
+echo ${superheroes[*]}
+echo ${superheroes[@]}
+
+###### Arrays asociativos
+declare -A superheroes_dc
+
+superheroes_dc[rojo]="Flash"
+superheroes_dc[verde]="Green lantern"
+superheroes_dc[azul]="Superman"
+
+echo ${superheroes_dc[*]}     # Me da los valores del array
+echo ${superheroes_dc[@]}
+echo ${!superheroes_dc[@]}    # Obtengo las claves
+
+for superheroe in ${superheroes_dc[*]}
+do
+    echo $superheroe
+done
+
+for color in ${!superheroes_dc[*]}
+do
+    echo $color ---- ${superheroes_dc[$color]}
+done
+
+declare -A villanos_marvel
+villanos_marvel=( [grandioso]="Thanos" [oscurito]="Venom" [implacable]="Mephisto" )
+
+echo ${!villanos_marvel[*]}
+echo ${villanos_marvel[*]}
+for color in ${!villanos_marvel[*]}
+do
+    echo $color ---- ${villanos_marvel[$color]}
+done
+
+echo ${villanos_marvel[1]} # RUINA !!!
+
+#### Arrays en 2D
+# No existen en BASH
+declare -A matriz
+matriz[1,1]=1
+matriz[1,2]=2
+matriz[2,1]=3
+matriz["2,2"]=4
+
+echo ${matriz[2,2]}
+
+
