@@ -6,6 +6,12 @@
 # Cargar el superread
 source ../../proyecto/gui/super_read.sh
 
+clear
+cat cortinilla.txt
+azul "Bienvenido al juego de la adivinanza..."
+echo
+echo
+
 # Calcular un número aleatorio entre 0 y 10
 let NUMERO_A_ADIVINAR=$RANDOM%11
 
@@ -19,7 +25,7 @@ do
         # Que el valor esté entre 0 y 10 <<<<  Superread
     super_read  -p "Adivina un número entre 0 y 10" \
                 -v numero_del_usuario \
-                -r "^[0-9]|10$" \
+                -r "^([0-9]|10)$" \
                 -m 3 \
                 -f "Eso no vale... tienes que poner un número entre 0 y 10" \
                 -e "No vales ni pa' poner un número... "
@@ -40,14 +46,19 @@ do
     then
         # EUREKA !!!!
         verde "Eres un campeón ! Máquina !!!"
+        echo
         exit 0
     fi
     
     # Sino... le quito una vida
     let vidas=$vidas-1
+    amarillo "Ese no es... Prueba otra vez. "
+    echo
 done
 
 # Cuando no le quedan vidas
 # PUF !!!!
+echo "El número era: $NUMERO_A_ADIVINAR"
 amarillo "Uiii.... casi casi... En otra ocasión será."
+echo
 exit 0
