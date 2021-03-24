@@ -21,3 +21,9 @@ echo Voy a reiniciar en $reinicio_en segundos
 
 super_read -p "Dame el nombre del servidor" -v "nombre_servidor" -r $PATRON_NOMBRE_SERVIDOR -f "Nombre de servidor incorrecto"
 echo El nombre del servidor es $nombre_servidor
+
+super_read -p "Que sistema operativo quieres instalar" -v sistema -a="ubuntu redhat debian" -d ubuntu
+
+super_read -p "Dame el paquete a instalar" -v paquete -r ^[a-z-]+$ -d nginx
+
+super_read -p "Estas seguro de querer instalarlo" -v confirmacion -a="s n" -d n

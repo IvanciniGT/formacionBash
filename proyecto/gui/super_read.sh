@@ -20,7 +20,9 @@
 #   Estás seguro [s]?
 #     read -p "Estás seguro (s/n) [s]? " -v segurisimo
 
-source ./formatos.sh
+#source (MISMA CARPETA QUE ESTE SCRIPT)/formatos.sh
+# RUTA COMPLETA DEL SCRIPT, NOMBRE INCLUIDO: $BASH_SOURCE
+source $(dirname $BASH_SOURCE)/formatos.sh
 
 function show_help(){
     echo AQUI IRIA LA AYUDA

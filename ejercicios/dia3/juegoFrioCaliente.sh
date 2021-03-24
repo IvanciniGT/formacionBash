@@ -54,12 +54,6 @@ do
     let vidas=$vidas-1
     amarillo "Ese no es... Prueba otra vez. "
     echo
-    # Muy frio      (>=10)
-    # Frio          (7-9)
-    # Templado      (5-6)
-    # Caliente      (3-4)
-    # Que te quemas (1-2 cerca)
-    # Número entre 0 y 20
 done
 
 # Cuando no le quedan vidas
