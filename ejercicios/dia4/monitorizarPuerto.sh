@@ -6,3 +6,6 @@
 # Va a generar un fichero llamado errores.log
 # Para cada vez que no está el puerto operativo, queremos que lo anote
 # en el log, con la fecha de la peticion en la que no estaba funcionando
+
+# Para chequear un puerto : NetCat: nc
+# nc -z host port
