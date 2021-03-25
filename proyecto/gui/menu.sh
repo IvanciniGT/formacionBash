@@ -13,7 +13,7 @@
 #            >>> Si no me equivoco... quiero invocar una funcion
 
 # Argumentos:
-#   -f fichero de menu
+#   fichero de menu
 #
 # LINEA1: TITULO    >>> VARIABLE
 # LINEA2: Mensaje de error   >>> VARIABLE
