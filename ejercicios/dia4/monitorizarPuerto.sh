@@ -59,7 +59,7 @@ function monitorizar_puerto(){
 function monitorizar_servicios(){
     local _fichero_servicios=$1
     local _cada_cuanto=$2
-    
+    local _pids_monitorizadores=()
     while read linea
     do
         # Si es un Comentario       >> Salta a la siguiente iteración de un bucle
@@ -72,12 +72,23 @@ function monitorizar_servicios(){
         
         for _puerto in $_puertos
         do
-            monitorizar_puerto $_servidor $_puerto $_cada_cuanto &
+            monitorizar_puerto $_servidor $_puerto $_cada_cuanto > /dev/null &
+            _pids_monitorizadores+=( $! )
         done
         
     done < $_fichero_servicios
+    
+    read -N 1
+    for _pid in ${_pids_monitorizadores[@]}
+    do
+        kill -9 $_pid
+    done
+    
+    
 }
 
+echo Iniciando la monitorizacion
+echo Pulsa cualquier tecla para finalizar
 monitorizar_servicios servicios.txt 5
 
 
