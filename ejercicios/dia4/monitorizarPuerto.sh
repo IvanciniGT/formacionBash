@@ -47,7 +47,38 @@ function monitorizar_puerto(){
     done
 }
 
-monitorizar_puerto localhost 8080 2
+#monitorizar_puerto localhost 8080 2
+
+################
+#Leer un fichero con:
+#    Servidores y puertos que quiero monitorizar
+#    SINTAXIS DEL FICHERO
+# servidor:PUERTO1 PUERTO2
+# servidor:PUERTO1
+
+function monitorizar_servicios(){
+    local _fichero_servicios=$1
+    local _cada_cuanto=$2
+    
+    while read linea
+    do
+        # Si es un Comentario       >> Salta a la siguiente iteración de un bucle
+        [[ "$linea" =~ ^\s*[#] ]] && continue 
+        # Si es una linea en blanco >> Salta a la siguiente iteración de un bucle
+        [[ "$linea" =~ ^\s*$ ]]   && continue 
+
+        local _servidor="${linea%=*}" # Elimina todo lo que hay despues del igual
+        local _puertos="${linea#*=}"  # Elimina lo que hay hasta el igual
+        
+        for _puerto in $_puertos
+        do
+            monitorizar_puerto $_servidor $_puerto $_cada_cuanto &
+        done
+        
+    done < $_fichero_servicios
+}
+
+monitorizar_servicios servicios.txt 5
 
 
 
