@@ -1,4 +1,4 @@
-source gui/menu.sh
+source  gui/menu.sh
 
 function monitorizacion(){
     generar_menu monitorizacion
