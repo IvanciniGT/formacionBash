@@ -285,6 +285,20 @@ function menu_servicios(){
     clear
     generar_menu servicios
 }
+function alta_servicio_previo(){
+    echo ""
+    echo $(verde "MENU PRINCIPAL > ALTA DE SERVICIO")
+    alta_servicio
+    echo $(verde "Servicio creado correctamente")
+    pausa
+}
+function borrar_servicio_previo(){
+    echo ""
+    echo $(verde "MENU PRINCIPAL > BORRADO DE SERVICIO")
+    borrar_servicio
+    echo $(verde "Servicio borrado correctamente")
+    pausa
+}
 function salir(){
     clear
     amarillo "Gracias por usar el monitorizador de servicios ACME®."

@@ -1,6 +1,6 @@
 Menú de Servicios
 Opción no válida
 Salir=salir
-Alta de Servicio=alta_servicio
-Baja de Servicio=borrar_servicio
+Alta de Servicio=alta_servicio_previo
+Baja de Servicio=borrar_servicio_previo
 Monitorizar=monitorizar
