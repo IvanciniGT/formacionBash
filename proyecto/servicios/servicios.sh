@@ -1,5 +1,6 @@
 #!/bin/bash
 source ../gui/menu.sh
+source ./monitorizarPuerto.sh
 
 #Argumentos:
 #  fichero de servicios <<< obligatorio
@@ -308,7 +309,25 @@ function salir(){
     exit 0
 }
 function monitorizar(){
-    echo aqui va la monitorizacion
+    local _fichero=$FICHERO_POR_DEFECTO
+    local _cada_cuanto=5
+    local _umbral_alerta=5
+    local _umbral_repeticion_alerta=10
+
+    # Leer todos esos parametros de argumentos...
+    # Si falta alguno, pedirlo por consola
+
+    echo ""
+    echo $(verde "MENU PRINCIPAL > MONITORIZACION")
+    echo Iniciando la monitorizacion
+    echo Pulsa cualquier tecla para finalizar
+    monitorizar_servicios $_fichero $_cada_cuanto $_umbral_alerta $_umbral_repeticion_alerta
+
+    echo $(verde "Monitorizacion concluida")
+    pausa
+
+    
+    
 }
 function servicios(){
     local _comando=$1
@@ -348,4 +367,5 @@ function servicios(){
 
 }
 
-servicios "$@"
+servicios "$@" 
+
