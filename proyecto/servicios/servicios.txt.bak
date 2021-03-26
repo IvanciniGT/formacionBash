@@ -1,13 +1,8 @@
-
 # Aqui pongo los de Base de datos
 localhost=3306
-
-# Aqui pongo los servicios web
-localhost=80
-
-# Aqui pongo los servicios ssh
-localhost=22 # me hubieran puesto un comentario
-
 # Aqui pongo los servicios web
 # Dos comentarios
 ivancito02=999
+
+# MIA
+ivancini.prod=33

@@ -172,7 +172,7 @@ function super_read(){
         read _valor_del_usuario
         
         # Rellenando con valor por defecto si lo ha dejado vacio
-        if [[ -z $_valor_del_usuario ]]
+        if [[ -z "$_valor_del_usuario" ]]
         then
             _valor_del_usuario="$_default"
         fi
@@ -190,7 +190,7 @@ function super_read(){
                     if [[ "$_valor_del_usuario" == "$_valor_actual" ]]
                     then
                         # Guardar el valor introducido por el usuario en la variable que me han dicho
-                        eval $_var_name=$_valor_del_usuario                          
+                        eval $_var_name="$_valor_del_usuario"
                         return 0
                     fi
                 done
@@ -198,7 +198,7 @@ function super_read(){
                 let _max_attemps=$_max_attemps-1
             else
             # Guardar el valor introducido por el usuario en la variable que me han dicho
-            eval $_var_name=$_valor_del_usuario                          
+            eval $_var_name="$_valor_del_usuario"
             return 0
             fi
     

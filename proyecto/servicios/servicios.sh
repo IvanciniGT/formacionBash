@@ -250,9 +250,8 @@ function borrar_servicio(){
             continue
         else
             #if [[ $linea =~ $_servidor=$_puerto ]]
-            if [[ ! $linea =~ ^\s*$_servidor\s*=\s*$_puerto\s*(#.*)?$ ]]
+            if [[ ! $linea =~ ^\s*$_servidor\s*=\s*$_puerto\s*#*.*$ ]]
             then
-                echo "" >> $nuevo_fichero
                 for comentario_daniel in "${comentarios_daniel[@]}"
                 do
                     echo "$comentario_daniel" >> $nuevo_fichero
@@ -275,5 +274,64 @@ function borrar_servicio(){
 # Reemplazo el viejo archivo por el nuevo archivo
 }
 
-# alta_servicio "$@"
-borrar_servicio "$@"
+#alta_servicio "$@"
+#borrar_servicio "$@"
+
+function help_servicios(){
+    echo AQUI IRIA LA AYUDA DE LOS SERVICIOS. Todo
+}
+
+function menu_servicios(){
+    clear
+    generar_menu servicios
+}
+function salir(){
+    clear
+    amarillo "Gracias por usar el monitorizador de servicios ACME®."
+    echo ""
+    echo $(amarillo "Hasta pronto.")
+    
+    exit 0
+}
+function monitorizar(){
+    echo aqui va la monitorizacion
+}
+function servicios(){
+    local _comando=$1
+    shift
+    
+    if [[ -z $_comando ]]
+    then
+        #./servicios.sh
+        menu_servicios
+    else
+        case $_comando in
+            create)
+                # Si le doy el comando (parametro create), que llame a alta con los parametros adecuados
+                # ./servicios.sh create -h ivancito02 --port=999 -nd
+                # ./servicios.sh create 
+                alta_servicio "$@"
+            ;;
+            delete)
+                # Si le doy el comando (parametro delete), que llame a alta con los parametros adecuados
+                #./servicios.sh delete -h ivancito02 --port=999
+                #./servicios.sh delete
+                borrar_servicio "$@"
+            ;;
+            monitorize)
+                monitorizar
+            ;;
+            *)
+                error "Opción inválido"
+                help_servicios
+        esac
+    fi
+# Cuando llame al script de servicios
+# Si le doy el comando (parametro monitorize), que llame a alta con los parametros adecuados
+# Si no le doy ningun parametros... Quiero un menu interactivo, que me permita elegir entre esas 3 opciones
+
+#./servicios.sh monitorize 
+
+}
+
+servicios "$@"
