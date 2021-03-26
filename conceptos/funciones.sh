@@ -117,3 +117,17 @@ function pruebaArgumentos(){
 }
 
 pruebaArgumentos arg1 arg2 arg3
+
+#####################
+
+function a(){
+    echo $1 $2 $3
+}
+
+function b(){
+    echo Hago algo
+#    a "$1" "$2" "$3"
+    a "$@"
+}
+
+b Hola amigo Ivan

@@ -121,7 +121,6 @@ function monitorizar_servicios(){
 }
 
 
-
 echo Iniciando la monitorizacion
 echo Pulsa cualquier tecla para finalizar
 monitorizar_servicios servicios.txt 5 5 10
